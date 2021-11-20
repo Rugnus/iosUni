@@ -9,21 +9,45 @@
 /* Begin PBXBuildFile section */
 		7E07915E27493E8600624A62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07915D27493E8600624A62 /* AppDelegate.swift */; };
 		7E07916027493E8600624A62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07915F27493E8600624A62 /* SceneDelegate.swift */; };
-		7E07916227493E8600624A62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07916127493E8600624A62 /* ViewController.swift */; };
+		7E07916227493E8600624A62 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07916127493E8600624A62 /* BaseViewController.swift */; };
 		7E07916527493E8600624A62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E07916327493E8600624A62 /* Main.storyboard */; };
 		7E07916727493E8700624A62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E07916627493E8700624A62 /* Assets.xcassets */; };
 		7E07916A27493E8700624A62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E07916827493E8700624A62 /* LaunchScreen.storyboard */; };
+		7E07917627493EC600624A62 /* CallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07917527493EC600624A62 /* CallViewController.swift */; };
+		7E07917927493F3500624A62 /* BonusAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07917827493F3500624A62 /* BonusAmount.swift */; };
+		7E07917C27493F4B00624A62 /* BonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07917B27493F4B00624A62 /* BonusViewController.swift */; };
+		7E07918227493FEC00624A62 /* Agreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07918127493FEC00624A62 /* Agreement.swift */; };
+		7E0791842749400D00624A62 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0791832749400D00624A62 /* AgreementViewController.swift */; };
+		7E0791862749404000624A62 /* CodeEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0791852749404000624A62 /* CodeEditViewController.swift */; };
+		7E0791892749405000624A62 /* PhoneEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0791882749405000624A62 /* PhoneEditViewController.swift */; };
+		7E07918C274940EC00624A62 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07918B274940EC00624A62 /* BaseCell.swift */; };
+		7E079190274943E700624A62 /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07918F274943E700624A62 /* NetworkServiceMock.swift */; };
+		7E0791932749549F00624A62 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0791922749549F00624A62 /* Call.swift */; };
+		7E0791952749555F00624A62 /* BonusText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0791942749555F00624A62 /* BonusText.swift */; };
+		7E07919727496A9E00624A62 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07919627496A9E00624A62 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7E07915A27493E8600624A62 /* Refactor Homework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Refactor Homework.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E07915D27493E8600624A62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E07915F27493E8600624A62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7E07916127493E8600624A62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7E07916127493E8600624A62 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7E07916427493E8600624A62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7E07916627493E8700624A62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E07916927493E8700624A62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7E07916B27493E8700624A62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E07917527493EC600624A62 /* CallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewController.swift; sourceTree = "<group>"; };
+		7E07917827493F3500624A62 /* BonusAmount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusAmount.swift; sourceTree = "<group>"; };
+		7E07917B27493F4B00624A62 /* BonusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusViewController.swift; sourceTree = "<group>"; };
+		7E07918127493FEC00624A62 /* Agreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Agreement.swift; sourceTree = "<group>"; };
+		7E0791832749400D00624A62 /* AgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
+		7E0791852749404000624A62 /* CodeEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeEditViewController.swift; sourceTree = "<group>"; };
+		7E0791882749405000624A62 /* PhoneEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEditViewController.swift; sourceTree = "<group>"; };
+		7E07918B274940EC00624A62 /* BaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		7E07918F274943E700624A62 /* NetworkServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMock.swift; sourceTree = "<group>"; };
+		7E0791922749549F00624A62 /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
+		7E0791942749555F00624A62 /* BonusText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusText.swift; sourceTree = "<group>"; };
+		7E07919627496A9E00624A62 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +80,139 @@
 		7E07915C27493E8600624A62 /* Refactor Homework */ = {
 			isa = PBXGroup;
 			children = (
+				7E07918D274943D600624A62 /* Services */,
+				7E07917127493E8D00624A62 /* Modules */,
 				7E07915D27493E8600624A62 /* AppDelegate.swift */,
 				7E07915F27493E8600624A62 /* SceneDelegate.swift */,
-				7E07916127493E8600624A62 /* ViewController.swift */,
+				7E07916127493E8600624A62 /* BaseViewController.swift */,
+				7E07918B274940EC00624A62 /* BaseCell.swift */,
 				7E07916327493E8600624A62 /* Main.storyboard */,
 				7E07916627493E8700624A62 /* Assets.xcassets */,
 				7E07916827493E8700624A62 /* LaunchScreen.storyboard */,
 				7E07916B27493E8700624A62 /* Info.plist */,
+				7E07919627496A9E00624A62 /* Extensions.swift */,
 			);
 			path = "Refactor Homework";
+			sourceTree = "<group>";
+		};
+		7E07917127493E8D00624A62 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7E07917427493EA700624A62 /* Authorization */,
+				7E07917327493EA200624A62 /* Bonus */,
+				7E07917227493E9700624A62 /* Call */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		7E07917227493E9700624A62 /* Call */ = {
+			isa = PBXGroup;
+			children = (
+				7E0791912749549700624A62 /* Model */,
+				7E07917527493EC600624A62 /* CallViewController.swift */,
+			);
+			path = Call;
+			sourceTree = "<group>";
+		};
+		7E07917327493EA200624A62 /* Bonus */ = {
+			isa = PBXGroup;
+			children = (
+				7E07917A27493F4100624A62 /* View */,
+				7E07917727493F2D00624A62 /* Model */,
+			);
+			path = Bonus;
+			sourceTree = "<group>";
+		};
+		7E07917427493EA700624A62 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				7E07918A2749405600624A62 /* Code */,
+				7E07917E27493F7F00624A62 /* Phone */,
+				7E07917D27493F7B00624A62 /* Agreement */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		7E07917727493F2D00624A62 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E07917827493F3500624A62 /* BonusAmount.swift */,
+				7E0791942749555F00624A62 /* BonusText.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7E07917A27493F4100624A62 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7E07917B27493F4B00624A62 /* BonusViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7E07917D27493F7B00624A62 /* Agreement */ = {
+			isa = PBXGroup;
+			children = (
+				7E07918027493FDA00624A62 /* View */,
+				7E07917F27493FBC00624A62 /* Model */,
+			);
+			path = Agreement;
+			sourceTree = "<group>";
+		};
+		7E07917E27493F7F00624A62 /* Phone */ = {
+			isa = PBXGroup;
+			children = (
+				7E0791882749405000624A62 /* PhoneEditViewController.swift */,
+			);
+			path = Phone;
+			sourceTree = "<group>";
+		};
+		7E07917F27493FBC00624A62 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E07918127493FEC00624A62 /* Agreement.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7E07918027493FDA00624A62 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7E0791832749400D00624A62 /* AgreementViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7E07918A2749405600624A62 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				7E0791852749404000624A62 /* CodeEditViewController.swift */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		7E07918D274943D600624A62 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7E07918E274943DE00624A62 /* NetworkServiceMock */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7E07918E274943DE00624A62 /* NetworkServiceMock */ = {
+			isa = PBXGroup;
+			children = (
+				7E07918F274943E700624A62 /* NetworkServiceMock.swift */,
+			);
+			path = NetworkServiceMock;
+			sourceTree = "<group>";
+		};
+		7E0791912749549700624A62 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E0791922749549F00624A62 /* Call.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +286,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E07916227493E8600624A62 /* ViewController.swift in Sources */,
+				7E0791862749404000624A62 /* CodeEditViewController.swift in Sources */,
+				7E079190274943E700624A62 /* NetworkServiceMock.swift in Sources */,
+				7E0791892749405000624A62 /* PhoneEditViewController.swift in Sources */,
+				7E07916227493E8600624A62 /* BaseViewController.swift in Sources */,
+				7E0791952749555F00624A62 /* BonusText.swift in Sources */,
+				7E0791932749549F00624A62 /* Call.swift in Sources */,
+				7E07917927493F3500624A62 /* BonusAmount.swift in Sources */,
 				7E07915E27493E8600624A62 /* AppDelegate.swift in Sources */,
+				7E07917627493EC600624A62 /* CallViewController.swift in Sources */,
+				7E07917C27493F4B00624A62 /* BonusViewController.swift in Sources */,
+				7E07919727496A9E00624A62 /* Extensions.swift in Sources */,
+				7E07918C274940EC00624A62 /* BaseCell.swift in Sources */,
 				7E07916027493E8600624A62 /* SceneDelegate.swift in Sources */,
+				7E07918227493FEC00624A62 /* Agreement.swift in Sources */,
+				7E0791842749400D00624A62 /* AgreementViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +455,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -323,6 +484,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
