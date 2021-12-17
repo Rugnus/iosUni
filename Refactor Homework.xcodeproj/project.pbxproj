@@ -25,6 +25,16 @@
 		7E0791932749549F00624A62 /* Call.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0791922749549F00624A62 /* Call.swift */; };
 		7E0791952749555F00624A62 /* BonusText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0791942749555F00624A62 /* BonusText.swift */; };
 		7E07919727496A9E00624A62 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E07919627496A9E00624A62 /* Extensions.swift */; };
+		B34260F42764A9B9007682E5 /* AgreementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34260F32764A9B9007682E5 /* AgreementsPresenter.swift */; };
+		B3890EDF276B96BF0089AA10 /* CodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EDE276B96BF0089AA10 /* CodePresenter.swift */; };
+		B3890EE2276B9D220089AA10 /* BonusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EE1276B9D220089AA10 /* BonusPresenter.swift */; };
+		B3890EE9276CA4BE0089AA10 /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EE8276CA4BE0089AA10 /* CallViewModel.swift */; };
+		B3890EF1276CFACB0089AA10 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EF0276CFACB0089AA10 /* Phone.swift */; };
+		B3890EF4276CFB1B0089AA10 /* PhoneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EF3276CFB1B0089AA10 /* PhoneInteractor.swift */; };
+		B3890EF6276CFD040089AA10 /* PhonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EF5276CFD040089AA10 /* PhonePresenter.swift */; };
+		B3890EFC276D06FB0089AA10 /* PhoneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EFB276D06FB0089AA10 /* PhoneRouter.swift */; };
+		B3B5C80B27614D47002B1448 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5C80A27614D47002B1448 /* CodeView.swift */; };
+		B3B5C80D27614DC0002B1448 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5C80C27614DC0002B1448 /* Code.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +58,16 @@
 		7E0791922749549F00624A62 /* Call.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Call.swift; sourceTree = "<group>"; };
 		7E0791942749555F00624A62 /* BonusText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusText.swift; sourceTree = "<group>"; };
 		7E07919627496A9E00624A62 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B34260F32764A9B9007682E5 /* AgreementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementsPresenter.swift; sourceTree = "<group>"; };
+		B3890EDE276B96BF0089AA10 /* CodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePresenter.swift; sourceTree = "<group>"; };
+		B3890EE1276B9D220089AA10 /* BonusPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusPresenter.swift; sourceTree = "<group>"; };
+		B3890EE8276CA4BE0089AA10 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
+		B3890EF0276CFACB0089AA10 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
+		B3890EF3276CFB1B0089AA10 /* PhoneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInteractor.swift; sourceTree = "<group>"; };
+		B3890EF5276CFD040089AA10 /* PhonePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonePresenter.swift; sourceTree = "<group>"; };
+		B3890EFB276D06FB0089AA10 /* PhoneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneRouter.swift; sourceTree = "<group>"; };
+		B3B5C80A27614D47002B1448 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
+		B3B5C80C27614DC0002B1448 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,8 +128,9 @@
 		7E07917227493E9700624A62 /* Call */ = {
 			isa = PBXGroup;
 			children = (
+				B3890EE7276CA4AE0089AA10 /* ViewModel */,
+				B3890EE3276BA4B10089AA10 /* View */,
 				7E0791912749549700624A62 /* Model */,
-				7E07917527493EC600624A62 /* CallViewController.swift */,
 			);
 			path = Call;
 			sourceTree = "<group>";
@@ -117,6 +138,7 @@
 		7E07917327493EA200624A62 /* Bonus */ = {
 			isa = PBXGroup;
 			children = (
+				B3890EE0276B9D0D0089AA10 /* Presenter */,
 				7E07917A27493F4100624A62 /* View */,
 				7E07917727493F2D00624A62 /* Model */,
 			);
@@ -153,6 +175,7 @@
 		7E07917D27493F7B00624A62 /* Agreement */ = {
 			isa = PBXGroup;
 			children = (
+				B34260F22764A9A9007682E5 /* Presenter */,
 				7E07918027493FDA00624A62 /* View */,
 				7E07917F27493FBC00624A62 /* Model */,
 			);
@@ -162,7 +185,11 @@
 		7E07917E27493F7F00624A62 /* Phone */ = {
 			isa = PBXGroup;
 			children = (
-				7E0791882749405000624A62 /* PhoneEditViewController.swift */,
+				B3890EF2276CFB000089AA10 /* Interactor */,
+				B3890EEF276CFA8C0089AA10 /* Router */,
+				B3890EEE276CFA840089AA10 /* Entity */,
+				B3890EED276CFA7B0089AA10 /* Presenter */,
+				B3890EEA276CFA530089AA10 /* View */,
 			);
 			path = Phone;
 			sourceTree = "<group>";
@@ -186,6 +213,9 @@
 		7E07918A2749405600624A62 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				B3B5C80927614D00002B1448 /* View */,
+				B3B5C80827614CF9002B1448 /* Presenter */,
+				B3B5C80727614CF0002B1448 /* Model */,
 				7E0791852749404000624A62 /* CodeEditViewController.swift */,
 			);
 			path = Code;
@@ -213,6 +243,102 @@
 				7E0791922749549F00624A62 /* Call.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B34260F22764A9A9007682E5 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B34260F32764A9B9007682E5 /* AgreementsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B3890EE0276B9D0D0089AA10 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3890EE1276B9D220089AA10 /* BonusPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B3890EE3276BA4B10089AA10 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7E07917527493EC600624A62 /* CallViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B3890EE7276CA4AE0089AA10 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B3890EE8276CA4BE0089AA10 /* CallViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B3890EEA276CFA530089AA10 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7E0791882749405000624A62 /* PhoneEditViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B3890EED276CFA7B0089AA10 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3890EF5276CFD040089AA10 /* PhonePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B3890EEE276CFA840089AA10 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				B3890EF0276CFACB0089AA10 /* Phone.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		B3890EEF276CFA8C0089AA10 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B3890EFB276D06FB0089AA10 /* PhoneRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		B3890EF2276CFB000089AA10 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				B3890EF3276CFB1B0089AA10 /* PhoneInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		B3B5C80727614CF0002B1448 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3B5C80C27614DC0002B1448 /* Code.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B3B5C80827614CF9002B1448 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3890EDE276B96BF0089AA10 /* CodePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		B3B5C80927614D00002B1448 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B3B5C80A27614D47002B1448 /* CodeView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,21 +412,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3890EF4276CFB1B0089AA10 /* PhoneInteractor.swift in Sources */,
+				B3890EF6276CFD040089AA10 /* PhonePresenter.swift in Sources */,
 				7E0791862749404000624A62 /* CodeEditViewController.swift in Sources */,
 				7E079190274943E700624A62 /* NetworkServiceMock.swift in Sources */,
+				B3890EE2276B9D220089AA10 /* BonusPresenter.swift in Sources */,
 				7E0791892749405000624A62 /* PhoneEditViewController.swift in Sources */,
 				7E07916227493E8600624A62 /* BaseViewController.swift in Sources */,
 				7E0791952749555F00624A62 /* BonusText.swift in Sources */,
+				B3890EE9276CA4BE0089AA10 /* CallViewModel.swift in Sources */,
+				B34260F42764A9B9007682E5 /* AgreementsPresenter.swift in Sources */,
 				7E0791932749549F00624A62 /* Call.swift in Sources */,
 				7E07917927493F3500624A62 /* BonusAmount.swift in Sources */,
+				B3890EF1276CFACB0089AA10 /* Phone.swift in Sources */,
 				7E07915E27493E8600624A62 /* AppDelegate.swift in Sources */,
 				7E07917627493EC600624A62 /* CallViewController.swift in Sources */,
 				7E07917C27493F4B00624A62 /* BonusViewController.swift in Sources */,
 				7E07919727496A9E00624A62 /* Extensions.swift in Sources */,
 				7E07918C274940EC00624A62 /* BaseCell.swift in Sources */,
+				B3B5C80D27614DC0002B1448 /* Code.swift in Sources */,
 				7E07916027493E8600624A62 /* SceneDelegate.swift in Sources */,
 				7E07918227493FEC00624A62 /* Agreement.swift in Sources */,
+				B3890EFC276D06FB0089AA10 /* PhoneRouter.swift in Sources */,
 				7E0791842749400D00624A62 /* AgreementViewController.swift in Sources */,
+				B3B5C80B27614D47002B1448 /* CodeView.swift in Sources */,
+				B3890EDF276B96BF0089AA10 /* CodePresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

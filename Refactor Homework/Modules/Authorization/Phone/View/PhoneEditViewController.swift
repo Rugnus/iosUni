@@ -11,10 +11,13 @@ final class PhoneEditViewController: UIViewController {
     let phonePattern = "+# (###) ###-##-##"
     var getCodeBottomConstraint: NSLayoutConstraint!
     let networkService: NetworkServiceMock
+    let phonePresenter: PhonePresenter
+    let phoneInteractor: PhoneInteractor
     
-    init(networkService: NetworkServiceMock) {
+    init(networkService: NetworkServiceMock, phonePresenter: PhonePresenter, phoneInteractor: PhoneInteractor) {
+        self.phoneInteractor = phoneInteractor
         self.networkService = networkService
-        
+        self.phonePresenter = phonePresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -120,8 +123,8 @@ final class PhoneEditViewController: UIViewController {
         phoneField.delegate = self
         navigationItem.title = "Вход"
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKB)))
-        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openAgreementVC)))
-        getCodeButton.addTarget(self, action: #selector(getCodeClicked), for: .touchUpInside)
+        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(phonePresenter.didAgreementClicked)))
+        getCodeButton.addTarget(self, action: #selector(phonePresenter.didCodeClicked), for: .touchUpInside)
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
@@ -164,17 +167,15 @@ final class PhoneEditViewController: UIViewController {
 
 extension PhoneEditViewController: UITextFieldDelegate {
     
+    
+    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else {
             return
         }
 
-        if text.count == phonePattern.count {
-            self.enableCodeButton(true)
-            self.normalPhoneString = text
-        } else {
-            self.enableCodeButton(false)
-        }
+        phonePresenter.didTextFieldChange(text: text)
+        
     }
 
     func textField(_ textField: UITextField,
@@ -190,41 +191,13 @@ extension PhoneEditViewController: UITextFieldDelegate {
 
 extension PhoneEditViewController {
     
-    fileprivate func enableCodeButton(_ enabled: Bool) {
+    func enableCodeButton(_ enabled: Bool) {
         getCodeButton.isEnabled = enabled
         getCodeButton.backgroundColor = enabled ? .systemBlue : .lightGray
     }
     
-    @objc func getCodeClicked() {
-        hideKB()
-        
-        let phoneNumberWithOutPattern = normalPhoneString.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-        
-        activityIndicator.startAnimating()
-        
-        networkService.authSent(phoneNumber: phoneNumberWithOutPattern) {  [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                switch result {
-                case .success(_):
-                    let codeVC = CodeEditViewController(networkService: self.networkService)
-                    codeVC.phoneString = self.normalPhoneString
-                    self.navigationController?.pushViewController(codeVC, animated: true)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-    
     @objc func hideKB() {
         view.endEditing(true)
-    }
-
-    @objc func openAgreementVC() {
-        let agVC = AgreementViewController(networkService: networkService)
-        navigationController?.pushViewController(agVC, animated: true)
     }
     
     @objc func keyboardWillShow(notification: Notification) {

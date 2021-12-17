@@ -7,9 +7,11 @@ import UIKit
 final class CallViewController: UIViewController {
         
     let networkService: NetworkServiceMock
+    let callViewModel: CallViewModel
     
-    init(networkService: NetworkServiceMock) {
+    init(networkService: NetworkServiceMock, callViewModel: CallViewModel) {
         self.networkService = networkService
+        self.callViewModel = callViewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,32 +33,6 @@ final class CallViewController: UIViewController {
         label.font = .systemFont(ofSize: 21)
         return label
     }()
-    
-    @objc func supportCall() {
-        let alert = UIAlertController(title: "Звонок в call-центр", message: "Звонок будет произведён через приложение \"Телефон\"", preferredStyle: .actionSheet)
-        
-        let call = UIAlertAction(title: "Позвонить", style: .default) { (action) in
-            
-            self.networkService.getCallNumber { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let model):
-                        guard let number = URL(string: "tel://" + model.number) else { return }
-                        UIApplication.shared.open(number)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            }
-        }
-        
-        let cancel = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
-        alert.view.tintColor = .systemBlue
-        alert.addAction(call)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
-    }
     
     let callView: UIView = {
         let view = UIView()
@@ -87,7 +63,7 @@ final class CallViewController: UIViewController {
             callView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(supportCall))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(callViewModel.supportCall))
         tap.numberOfTapsRequired = 1
         callView.addGestureRecognizer(tap)
 
@@ -97,19 +73,6 @@ final class CallViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        animPhone()
-    }
-
-    func animPhone() {
-        UIView.animateKeyframes(withDuration: 1.0, delay: 0.0, options: [.repeat, .autoreverse]) {
-            var transform = CGAffineTransform.identity
-            transform = transform.scaledBy(x: 1.2, y: 1.2)
-            
-            self.phoneImageView.transform = transform
-        } completion: { (_) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.animPhone()
-            }
-        }
+        callViewModel.animPhone()
     }
 }

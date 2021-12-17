@@ -7,13 +7,20 @@ import UIKit
 final class CodeEditViewController: UIViewController {
     
     let networkService: NetworkServiceMock
-    let codePattern = "####"
-    var phoneString = ""
-    var normalCodeString = ""
+    var codeModel: Code
+//    let codePattern = "####"
+//    var phoneString = ""
+//    var normalCodeString = ""
+    let vc: CodeEditViewController
     var continueButtonBottomConstraint: NSLayoutConstraint!
+    let codePresenter: CodePresenter
+    let codeView: СodeView
     
-    init(networkService: NetworkServiceMock) {
+    init(networkService: NetworkServiceMock, codeModel: Code, codePresenter: CodePresenter, codeView: CodeView, vc: CodeEditViewController) {
         self.networkService = networkService
+        self.codeModel = codeModel
+        self.codePresenter = codePresenter
+        self.vc = vc
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -114,7 +121,7 @@ final class CodeEditViewController: UIViewController {
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        phoneLabel.text = "Отправлен на \(phoneString)"
+        phoneLabel.text = "Отправлен на \(codeModel.phoneString)"
         
         navigationItem.title = "Код"
         
@@ -157,28 +164,7 @@ final class CodeEditViewController: UIViewController {
 
         codeField.delegate = self
         
-        continueButton.addTarget(self, action: #selector(checkCode), for: .touchUpInside)
-    }
-    
-    @objc func checkCode() {
-        codeField.resignFirstResponder()
-        
-        activityIndicator.startAnimating()
-        
-        networkService.authSent(smsCode: self.normalCodeString) { [weak self] result in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                switch result {
-                case .success(_):
-                    self.sendSMSClicked()
-                case .failure(_):
-                    self.codeField.layer.borderColor = UIColor.red.cgColor
-                    self.alertLabel.isHidden = false
-                }
-            }
-        }
+        continueButton.addTarget(self, action: #selector(codePresenter.checkCode), for: .touchUpInside)
     }
     
 }
@@ -189,9 +175,9 @@ extension CodeEditViewController: UITextFieldDelegate {
             return
         }
         
-        if text.count == codePattern.count {
+        if text.count == codeModel.codePattern.count {
             self.enableCodeButton(true)
-            self.normalCodeString = text
+            self.codeModel.normalCodeString = text
         } else {
             self.enableCodeButton(false)
         }
@@ -202,9 +188,9 @@ extension CodeEditViewController: UITextFieldDelegate {
             return true
         }
         
-        if text.count == codePattern.count {
+        if text.count == codeModel.codePattern.count {
             self.enableCodeButton(true)
-            self.normalCodeString = text
+            self.codeModel.normalCodeString = text
         } else {
             self.enableCodeButton(false)
         }
@@ -216,8 +202,8 @@ extension CodeEditViewController: UITextFieldDelegate {
                    replacementString string: String) -> Bool {
         guard let text = textField.text else { return false }
         let newLength = text.count + string.count - range.length
-        textField.text = text.formattedText(format: codePattern, appendChapter: "#")
-        return newLength <= codePattern.count
+        textField.text = text.formattedText(format: codeModel.codePattern, appendChapter: "#")
+        return newLength <= codeModel.codePattern.count
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -230,7 +216,7 @@ extension CodeEditViewController: UITextFieldDelegate {
 
 extension CodeEditViewController {
     
-    fileprivate func sendSMSClicked() {
+    func sendSMSClicked() {
         hideKB()
         navigationController?.popToRootViewController(animated: true)
     }
@@ -240,7 +226,7 @@ extension CodeEditViewController {
         continueButton.backgroundColor = (enabled) ? .systemBlue : .lightGray
     }
     
-    @objc fileprivate func hideKB() {
+    @objc func hideKB() {
         view.endEditing(true)
     }
     

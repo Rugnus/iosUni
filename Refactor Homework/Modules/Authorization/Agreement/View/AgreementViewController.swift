@@ -7,10 +7,11 @@ import UIKit
 class AgreementViewController: UIViewController {
     
     let networkService: NetworkServiceMock
+    let agreementPresenter: AgreementPresenter
     
-    init(networkService: NetworkServiceMock) {
+    init(networkService: NetworkServiceMock, agreementPresenter: AgreementPresenter) {
         self.networkService = networkService
-        
+        self.agreementPresenter = agreementPresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,17 +54,7 @@ class AgreementViewController: UIViewController {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
                 
-        networkService.getAgreement { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                switch result {
-                case .success(let model):
-                    self.agreementTextView.text = model.text
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+        self.agreementPresenter.showAgreement()
+        
     }
 }

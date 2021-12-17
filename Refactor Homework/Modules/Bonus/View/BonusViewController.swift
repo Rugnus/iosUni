@@ -5,10 +5,12 @@
 import UIKit
 
 final class BonusViewController: UIViewController {
-    
+
+    let presenter: BonusPresenter
     let networkService: NetworkServiceMock
     
-    init(networkService: NetworkServiceMock) {
+    init(networkService: NetworkServiceMock, presenter: BonusPresenter) {
+        self.presenter = presenter
         self.networkService = networkService
         
         super.init(nibName: nil, bundle: nil)
@@ -86,27 +88,10 @@ final class BonusViewController: UIViewController {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-        networkService.getBonusBalance { (result) in
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                switch result {
-                case .success(let model):
-                    self.bonusQuantity.text = "\(model.bonusAmount)"
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-
-        networkService.getBonusText { (result) in
-            switch result {
-            case .success(let model):
-                DispatchQueue.main.async {
-                    self.bonusTextView.text = model.bonusText
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+//        presenter.getBalance()
+//
+//        presenter.getText()
+        
+        
     }
 }
