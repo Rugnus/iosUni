@@ -6,11 +6,9 @@ import UIKit
 
 final class BonusViewController: UIViewController {
 
-    let presenter: BonusPresenter
     let networkService: NetworkServiceMock
     
-    init(networkService: NetworkServiceMock, presenter: BonusPresenter) {
-        self.presenter = presenter
+    init(networkService: NetworkServiceMock) {
         self.networkService = networkService
         
         super.init(nibName: nil, bundle: nil)
@@ -88,9 +86,9 @@ final class BonusViewController: UIViewController {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
         
-//        presenter.getBalance()
-//
-//        presenter.getText()
+        BonusPresenter(networkService: NetworkServiceMock(), view: BonusViewController(networkService: NetworkServiceMock())).getBalance()
+
+        BonusPresenter(networkService: NetworkServiceMock(), view: BonusViewController(networkService: NetworkServiceMock())).getText()
         
         
     }

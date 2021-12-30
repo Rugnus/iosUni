@@ -35,6 +35,7 @@
 		B3890EFC276D06FB0089AA10 /* PhoneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EFB276D06FB0089AA10 /* PhoneRouter.swift */; };
 		B3B5C80B27614D47002B1448 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5C80A27614D47002B1448 /* CodeView.swift */; };
 		B3B5C80D27614DC0002B1448 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5C80C27614DC0002B1448 /* Code.swift */; };
+		B3E9517B277DD51800840CD8 /* PhoneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E9517A277DD51800840CD8 /* PhoneBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		B3890EFB276D06FB0089AA10 /* PhoneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneRouter.swift; sourceTree = "<group>"; };
 		B3B5C80A27614D47002B1448 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		B3B5C80C27614DC0002B1448 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		B3E9517A277DD51800840CD8 /* PhoneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 		7E07917E27493F7F00624A62 /* Phone */ = {
 			isa = PBXGroup;
 			children = (
+				B3E95179277DD50500840CD8 /* Builder */,
 				B3890EF2276CFB000089AA10 /* Interactor */,
 				B3890EEF276CFA8C0089AA10 /* Router */,
 				B3890EEE276CFA840089AA10 /* Entity */,
@@ -341,6 +344,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B3E95179277DD50500840CD8 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				B3E9517A277DD51800840CD8 /* PhoneBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -428,6 +439,7 @@
 				7E07915E27493E8600624A62 /* AppDelegate.swift in Sources */,
 				7E07917627493EC600624A62 /* CallViewController.swift in Sources */,
 				7E07917C27493F4B00624A62 /* BonusViewController.swift in Sources */,
+				B3E9517B277DD51800840CD8 /* PhoneBuilder.swift in Sources */,
 				7E07919727496A9E00624A62 /* Extensions.swift in Sources */,
 				7E07918C274940EC00624A62 /* BaseCell.swift in Sources */,
 				B3B5C80D27614DC0002B1448 /* Code.swift in Sources */,

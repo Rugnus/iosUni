@@ -8,7 +8,6 @@
 import Foundation
 
 struct Code {
-    let networkService: NetworkServiceMock
     let codePattern = "####"
     var phoneString = ""
     var normalCodeString = ""

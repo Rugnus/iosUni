@@ -16,12 +16,9 @@ final class AgreementPresenter {
     
     let networkService: NetworkServiceMock
     let view: AgreementViewController?
-    let agreement: Agreement
     
-    
-    init(networkService: NetworkServiceMock, agreement: Agreement, view: AgreementViewController) {
+    init(networkService: NetworkServiceMock, view: AgreementViewController) {
         self.view = view
-        self.agreement = agreement
         self.networkService = networkService
     }
     

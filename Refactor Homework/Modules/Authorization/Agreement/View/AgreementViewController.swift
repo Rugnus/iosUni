@@ -7,11 +7,9 @@ import UIKit
 class AgreementViewController: UIViewController {
     
     let networkService: NetworkServiceMock
-    let agreementPresenter: AgreementPresenter
     
-    init(networkService: NetworkServiceMock, agreementPresenter: AgreementPresenter) {
+    init(networkService: NetworkServiceMock) {
         self.networkService = networkService
-        self.agreementPresenter = agreementPresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -54,7 +52,7 @@ class AgreementViewController: UIViewController {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
                 
-        self.agreementPresenter.showAgreement()
+        AgreementPresenter(networkService: NetworkServiceMock(), view: AgreementViewController(networkService: NetworkServiceMock())).showAgreement()
         
     }
 }

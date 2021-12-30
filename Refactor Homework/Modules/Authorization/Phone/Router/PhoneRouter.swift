@@ -8,7 +8,6 @@
 import UIKit
 
 protocol PhoneRouterProtocol: AnyObject {
-    var vc: UIViewController? { get }
     func openAgreementVC()
     func openCodeVC()
 }
@@ -18,12 +17,13 @@ final class PhoneRouter: PhoneRouterProtocol {
     let networkService: NetworkServiceMock
     let phoneVC: PhoneEditViewController
     let model: Phone
+    let agreementPresenter: AgreementPresenter
     
-    init(vc: UIViewController, networkService: NetworkServiceMock, phoneVC: PhoneEditViewController, model: Phone) {
-        self.vc = vc
+    init(networkService: NetworkServiceMock, phoneVC: PhoneEditViewController, model: Phone, agreementPresenter: AgreementPresenter) {
         self.networkService = networkService
         self.phoneVC = phoneVC
         self.model = model
+        self.agreementPresenter = agreementPresenter
     }
     
     
@@ -40,8 +40,9 @@ final class PhoneRouter: PhoneRouterProtocol {
                 self.phoneVC.activityIndicator.stopAnimating()
                 switch result {
                 case .success(_):
-                    let codeVC = CodeEditViewController(networkService: self.networkService)
-                    codeVC.phoneString = self.model.normalPhoneString
+                    let codeVC = CodeEditViewController(networkService: NetworkServiceMock(), codeModel: Code())
+                    var codeModel = Code()
+                    codeModel.phoneString = self.model.normalPhoneString
                     self.phoneVC.navigationController?.pushViewController(codeVC, animated: true)
                 case .failure(let error):
                     print(error)
@@ -50,7 +51,7 @@ final class PhoneRouter: PhoneRouterProtocol {
         }
     }
     @objc func openAgreementVC() {
-        let agVC = AgreementViewController(networkService: networkService, agreementPresenter: AgreementPresenter)
+        let agVC = AgreementViewController(networkService: networkService)
         phoneVC.navigationController?.pushViewController(agVC, animated: true)
     }
     

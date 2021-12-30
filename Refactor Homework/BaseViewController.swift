@@ -80,6 +80,8 @@ extension BaseViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
+//            let phoneBuilder = PhoneBuilder()
+//            let vc = phoneBuilder.build()
             let phoneEditVC = PhoneEditViewController(networkService: networkService)
             navigationController?.pushViewController(phoneEditVC, animated: true)
         case 1:

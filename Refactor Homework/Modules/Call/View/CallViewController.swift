@@ -7,11 +7,9 @@ import UIKit
 final class CallViewController: UIViewController {
         
     let networkService: NetworkServiceMock
-    let callViewModel: CallViewModel
     
-    init(networkService: NetworkServiceMock, callViewModel: CallViewModel) {
+    init(networkService: NetworkServiceMock) {
         self.networkService = networkService
-        self.callViewModel = callViewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,7 +61,7 @@ final class CallViewController: UIViewController {
             callView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(callViewModel.supportCall))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CallViewModel.supportCall))
         tap.numberOfTapsRequired = 1
         callView.addGestureRecognizer(tap)
 
@@ -73,6 +71,6 @@ final class CallViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        callViewModel.animPhone()
+        CallViewModel(view: CallViewController(networkService: NetworkServiceMock()), networkService: NetworkServiceMock()).animPhone()
     }
 }

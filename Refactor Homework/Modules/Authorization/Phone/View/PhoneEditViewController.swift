@@ -11,13 +11,9 @@ final class PhoneEditViewController: UIViewController {
     let phonePattern = "+# (###) ###-##-##"
     var getCodeBottomConstraint: NSLayoutConstraint!
     let networkService: NetworkServiceMock
-    let phonePresenter: PhonePresenter
-    let phoneInteractor: PhoneInteractor
     
-    init(networkService: NetworkServiceMock, phonePresenter: PhonePresenter, phoneInteractor: PhoneInteractor) {
-        self.phoneInteractor = phoneInteractor
+    init(networkService: NetworkServiceMock) {
         self.networkService = networkService
-        self.phonePresenter = phonePresenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -123,8 +119,8 @@ final class PhoneEditViewController: UIViewController {
         phoneField.delegate = self
         navigationItem.title = "Вход"
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKB)))
-        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(phonePresenter.didAgreementClicked)))
-        getCodeButton.addTarget(self, action: #selector(phonePresenter.didCodeClicked), for: .touchUpInside)
+        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PhonePresenter.didAgreementClicked)))
+        getCodeButton.addTarget(self, action: #selector(PhonePresenter.didCodeClicked), for: .touchUpInside)
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
@@ -174,7 +170,14 @@ extension PhoneEditViewController: UITextFieldDelegate {
             return
         }
 
-        phonePresenter.didTextFieldChange(text: text)
+        func textFieldChange(text: String) {
+            if text.count == phonePattern.count {
+                enableCodeButton(true)
+                normalPhoneString = text
+            } else {
+                enableCodeButton(false)
+            }
+        }
         
     }
 

@@ -5,5 +5,5 @@
 import Foundation
 
 struct Agreement: Codable {
-    let text: String
+    var text: String
 }

@@ -4,23 +4,21 @@
 
 import UIKit
 
-final class CodeEditViewController: UIViewController {
+class CodeEditViewController: UIViewController {
     
     let networkService: NetworkServiceMock
     var codeModel: Code
 //    let codePattern = "####"
 //    var phoneString = ""
 //    var normalCodeString = ""
-    let vc: CodeEditViewController
+//    let vc: CodeEditViewController
     var continueButtonBottomConstraint: NSLayoutConstraint!
-    let codePresenter: CodePresenter
-    let codeView: СodeView
+//    let presenter: CodePresenter
+//    let codeView: СodeView
     
-    init(networkService: NetworkServiceMock, codeModel: Code, codePresenter: CodePresenter, codeView: CodeView, vc: CodeEditViewController) {
+    init(networkService: NetworkServiceMock, codeModel: Code) {
         self.networkService = networkService
         self.codeModel = codeModel
-        self.codePresenter = codePresenter
-        self.vc = vc
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -164,7 +162,7 @@ final class CodeEditViewController: UIViewController {
 
         codeField.delegate = self
         
-        continueButton.addTarget(self, action: #selector(codePresenter.checkCode), for: .touchUpInside)
+        continueButton.addTarget(self, action: #selector(CodePresenter.checkCode), for: .touchUpInside)
     }
     
 }
