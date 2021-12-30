@@ -8,45 +8,24 @@
 import Foundation
 
 protocol BonusProtocol {
-    func getBalance()
-    func getText()
-    init(networkService: NetworkServiceMock, view: BonusViewController)
+    func viewDidLoadEvent()
+    init(networkService: NetworkServiceMock)
 }
 
 final class BonusPresenter: BonusProtocol {
     
     let networkService: NetworkServiceMock
-    let view: BonusViewController?
+    weak var bonusView: BonusViewController?
     
-    init(networkService: NetworkServiceMock, view: BonusViewController) {
+    init(networkService: NetworkServiceMock) {
         self.networkService = networkService
-        self.view = view
     }
     
-    func getBalance() {
-        networkService.getBonusBalance { (result) in
-            DispatchQueue.main.async {
-                self.view?.activityIndicator.stopAnimating()
-                switch result {
-                case .success(let model):
-                    self.view?.bonusQuantity.text = "\(model.bonusAmount)"
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+    func viewDidLoadEvent() {
+        bonusView?.setupView()
+        bonusView?.layoutView()
+        bonusView?.getText()
+        bonusView?.getBalance()
     }
     
-    func getText() {
-        networkService.getBonusText { (result) in
-            switch result {
-            case .success(let model):
-                DispatchQueue.main.async {
-                    self.view?.bonusTextView.text = model.bonusText
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 }

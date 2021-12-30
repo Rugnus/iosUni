@@ -4,12 +4,20 @@
 
 import UIKit
 
+protocol AgreementView: AnyObject {
+    func setupView()
+    func layoutView()
+    func showAgreement()
+}
+
 class AgreementViewController: UIViewController {
     
     let networkService: NetworkServiceMock
+    let presenter: AgreementProtocol
     
-    init(networkService: NetworkServiceMock) {
+    init(networkService: NetworkServiceMock, presenter: AgreementProtocol) {
         self.networkService = networkService
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,6 +39,12 @@ class AgreementViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        presenter.viewDidLoadEvent()
+    }
+}
+
+extension AgreementViewController: AgreementView {
+    func setupView() {
         navigationItem.title = "Cоглашение"
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +55,9 @@ class AgreementViewController: UIViewController {
         activityIndicator.startAnimating()
 
         view.backgroundColor = .systemBackground
-        
+    }
+    
+    func layoutView() {
         NSLayoutConstraint.activate([
             agreementTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             agreementTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -51,8 +67,20 @@ class AgreementViewController: UIViewController {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-                
-        AgreementPresenter(networkService: NetworkServiceMock(), view: AgreementViewController(networkService: NetworkServiceMock())).showAgreement()
-        
+    }
+    
+    func showAgreement() {
+        networkService.getAgreement { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                switch result {
+                case .success(let model):
+                    self.agreementTextView.text = model.text
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
     }
 }

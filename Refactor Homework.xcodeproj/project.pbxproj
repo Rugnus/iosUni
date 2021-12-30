@@ -28,14 +28,17 @@
 		B34260F42764A9B9007682E5 /* AgreementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34260F32764A9B9007682E5 /* AgreementsPresenter.swift */; };
 		B3890EDF276B96BF0089AA10 /* CodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EDE276B96BF0089AA10 /* CodePresenter.swift */; };
 		B3890EE2276B9D220089AA10 /* BonusPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EE1276B9D220089AA10 /* BonusPresenter.swift */; };
-		B3890EE9276CA4BE0089AA10 /* CallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EE8276CA4BE0089AA10 /* CallViewModel.swift */; };
 		B3890EF1276CFACB0089AA10 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EF0276CFACB0089AA10 /* Phone.swift */; };
 		B3890EF4276CFB1B0089AA10 /* PhoneInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EF3276CFB1B0089AA10 /* PhoneInteractor.swift */; };
 		B3890EF6276CFD040089AA10 /* PhonePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EF5276CFD040089AA10 /* PhonePresenter.swift */; };
 		B3890EFC276D06FB0089AA10 /* PhoneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3890EFB276D06FB0089AA10 /* PhoneRouter.swift */; };
-		B3B5C80B27614D47002B1448 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5C80A27614D47002B1448 /* CodeView.swift */; };
 		B3B5C80D27614DC0002B1448 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5C80C27614DC0002B1448 /* Code.swift */; };
 		B3E9517B277DD51800840CD8 /* PhoneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E9517A277DD51800840CD8 /* PhoneBuilder.swift */; };
+		B3E9517F277E3D1000840CD8 /* CallPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E9517E277E3D1000840CD8 /* CallPresenter.swift */; };
+		B3E95181277E3DB100840CD8 /* CallBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E95180277E3DB100840CD8 /* CallBuilder.swift */; };
+		B3E95183277E453700840CD8 /* BonusBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E95182277E453700840CD8 /* BonusBuilder.swift */; };
+		B3E95185277E473A00840CD8 /* AgreementBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E95184277E473A00840CD8 /* AgreementBuilder.swift */; };
+		B3E95187277E495B00840CD8 /* CodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E95186277E495B00840CD8 /* CodeBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,14 +65,17 @@
 		B34260F32764A9B9007682E5 /* AgreementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementsPresenter.swift; sourceTree = "<group>"; };
 		B3890EDE276B96BF0089AA10 /* CodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodePresenter.swift; sourceTree = "<group>"; };
 		B3890EE1276B9D220089AA10 /* BonusPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusPresenter.swift; sourceTree = "<group>"; };
-		B3890EE8276CA4BE0089AA10 /* CallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallViewModel.swift; sourceTree = "<group>"; };
 		B3890EF0276CFACB0089AA10 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
 		B3890EF3276CFB1B0089AA10 /* PhoneInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneInteractor.swift; sourceTree = "<group>"; };
 		B3890EF5276CFD040089AA10 /* PhonePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonePresenter.swift; sourceTree = "<group>"; };
 		B3890EFB276D06FB0089AA10 /* PhoneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneRouter.swift; sourceTree = "<group>"; };
-		B3B5C80A27614D47002B1448 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
 		B3B5C80C27614DC0002B1448 /* Code.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 		B3E9517A277DD51800840CD8 /* PhoneBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneBuilder.swift; sourceTree = "<group>"; };
+		B3E9517E277E3D1000840CD8 /* CallPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallPresenter.swift; sourceTree = "<group>"; };
+		B3E95180277E3DB100840CD8 /* CallBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallBuilder.swift; sourceTree = "<group>"; };
+		B3E95182277E453700840CD8 /* BonusBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBuilder.swift; sourceTree = "<group>"; };
+		B3E95184277E473A00840CD8 /* AgreementBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementBuilder.swift; sourceTree = "<group>"; };
+		B3E95186277E495B00840CD8 /* CodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,9 +136,10 @@
 		7E07917227493E9700624A62 /* Call */ = {
 			isa = PBXGroup;
 			children = (
-				B3890EE7276CA4AE0089AA10 /* ViewModel */,
+				B3E9517D277E3CFC00840CD8 /* CallPresenter */,
 				B3890EE3276BA4B10089AA10 /* View */,
 				7E0791912749549700624A62 /* Model */,
+				B3E95180277E3DB100840CD8 /* CallBuilder.swift */,
 			);
 			path = Call;
 			sourceTree = "<group>";
@@ -143,6 +150,7 @@
 				B3890EE0276B9D0D0089AA10 /* Presenter */,
 				7E07917A27493F4100624A62 /* View */,
 				7E07917727493F2D00624A62 /* Model */,
+				B3E95182277E453700840CD8 /* BonusBuilder.swift */,
 			);
 			path = Bonus;
 			sourceTree = "<group>";
@@ -180,6 +188,7 @@
 				B34260F22764A9A9007682E5 /* Presenter */,
 				7E07918027493FDA00624A62 /* View */,
 				7E07917F27493FBC00624A62 /* Model */,
+				B3E95184277E473A00840CD8 /* AgreementBuilder.swift */,
 			);
 			path = Agreement;
 			sourceTree = "<group>";
@@ -216,10 +225,10 @@
 		7E07918A2749405600624A62 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				B3B5C80927614D00002B1448 /* View */,
 				B3B5C80827614CF9002B1448 /* Presenter */,
 				B3B5C80727614CF0002B1448 /* Model */,
 				7E0791852749404000624A62 /* CodeEditViewController.swift */,
+				B3E95186277E495B00840CD8 /* CodeBuilder.swift */,
 			);
 			path = Code;
 			sourceTree = "<group>";
@@ -270,14 +279,6 @@
 				7E07917527493EC600624A62 /* CallViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		B3890EE7276CA4AE0089AA10 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				B3890EE8276CA4BE0089AA10 /* CallViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B3890EEA276CFA530089AA10 /* View */ = {
@@ -336,20 +337,20 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		B3B5C80927614D00002B1448 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B3B5C80A27614D47002B1448 /* CodeView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		B3E95179277DD50500840CD8 /* Builder */ = {
 			isa = PBXGroup;
 			children = (
 				B3E9517A277DD51800840CD8 /* PhoneBuilder.swift */,
 			);
 			path = Builder;
+			sourceTree = "<group>";
+		};
+		B3E9517D277E3CFC00840CD8 /* CallPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				B3E9517E277E3D1000840CD8 /* CallPresenter.swift */,
+			);
+			path = CallPresenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,18 +427,22 @@
 				B3890EF4276CFB1B0089AA10 /* PhoneInteractor.swift in Sources */,
 				B3890EF6276CFD040089AA10 /* PhonePresenter.swift in Sources */,
 				7E0791862749404000624A62 /* CodeEditViewController.swift in Sources */,
+				B3E9517F277E3D1000840CD8 /* CallPresenter.swift in Sources */,
+				B3E95185277E473A00840CD8 /* AgreementBuilder.swift in Sources */,
 				7E079190274943E700624A62 /* NetworkServiceMock.swift in Sources */,
+				B3E95183277E453700840CD8 /* BonusBuilder.swift in Sources */,
 				B3890EE2276B9D220089AA10 /* BonusPresenter.swift in Sources */,
+				B3E95187277E495B00840CD8 /* CodeBuilder.swift in Sources */,
 				7E0791892749405000624A62 /* PhoneEditViewController.swift in Sources */,
 				7E07916227493E8600624A62 /* BaseViewController.swift in Sources */,
 				7E0791952749555F00624A62 /* BonusText.swift in Sources */,
-				B3890EE9276CA4BE0089AA10 /* CallViewModel.swift in Sources */,
 				B34260F42764A9B9007682E5 /* AgreementsPresenter.swift in Sources */,
 				7E0791932749549F00624A62 /* Call.swift in Sources */,
 				7E07917927493F3500624A62 /* BonusAmount.swift in Sources */,
 				B3890EF1276CFACB0089AA10 /* Phone.swift in Sources */,
 				7E07915E27493E8600624A62 /* AppDelegate.swift in Sources */,
 				7E07917627493EC600624A62 /* CallViewController.swift in Sources */,
+				B3E95181277E3DB100840CD8 /* CallBuilder.swift in Sources */,
 				7E07917C27493F4B00624A62 /* BonusViewController.swift in Sources */,
 				B3E9517B277DD51800840CD8 /* PhoneBuilder.swift in Sources */,
 				7E07919727496A9E00624A62 /* Extensions.swift in Sources */,
@@ -447,7 +452,6 @@
 				7E07918227493FEC00624A62 /* Agreement.swift in Sources */,
 				B3890EFC276D06FB0089AA10 /* PhoneRouter.swift in Sources */,
 				7E0791842749400D00624A62 /* AgreementViewController.swift in Sources */,
-				B3B5C80B27614D47002B1448 /* CodeView.swift in Sources */,
 				B3890EDF276B96BF0089AA10 /* CodePresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

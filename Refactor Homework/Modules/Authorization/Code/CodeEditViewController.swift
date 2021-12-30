@@ -4,21 +4,21 @@
 
 import UIKit
 
+protocol CodeView: AnyObject {
+    func setupView()
+    func layoutView()
+    func willAppear()
+    func willDisappear()
+}
+
 class CodeEditViewController: UIViewController {
     
-    let networkService: NetworkServiceMock
     var codeModel: Code
-//    let codePattern = "####"
-//    var phoneString = ""
-//    var normalCodeString = ""
-//    let vc: CodeEditViewController
     var continueButtonBottomConstraint: NSLayoutConstraint!
-//    let presenter: CodePresenter
-//    let codeView: СodeView
-    
-    init(networkService: NetworkServiceMock, codeModel: Code) {
-        self.networkService = networkService
+    private let presenter: CodeProtocol
+    init(codeModel: Code, presenter: CodeProtocol) {
         self.codeModel = codeModel
+        self.presenter = presenter
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -91,78 +91,18 @@ class CodeEditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-        
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
+        presenter.viewWillDisappearEvent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        presenter.viewWillAppearEvent()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        phoneLabel.text = "Отправлен на \(codeModel.phoneString)"
-        
-        navigationItem.title = "Код"
-        
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKB)))
-        
-        view.addSubview(titleLabel)
-        view.addSubview(phoneLabel)
-        view.addSubview(codeField)
-        view.addSubview(continueButton)
-        view.addSubview(alertLabel)
-        view.addSubview(activityIndicator)
-        
-        continueButtonBottomConstraint = continueButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
-            phoneLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
-            phoneLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            phoneLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
-            codeField.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 8),
-            codeField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            codeField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            codeField.heightAnchor.constraint(equalToConstant: 42),
-                        
-            continueButtonBottomConstraint,
-            continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            continueButton.heightAnchor.constraint(equalToConstant: 44),
-            
-            alertLabel.topAnchor.constraint(equalTo: codeField.bottomAnchor, constant: 8),
-            alertLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-
-        codeField.delegate = self
-        
-        continueButton.addTarget(self, action: #selector(CodePresenter.checkCode), for: .touchUpInside)
+        presenter.viewDidLoadEvent()
     }
     
 }
@@ -248,4 +188,79 @@ extension CodeEditViewController {
             }
         }
     }
+}
+
+extension CodeEditViewController: CodeView {
+    
+    func setupView() {
+   
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        phoneLabel.text = "Отправлен на \(codeModel.phoneString)"
+        
+        navigationItem.title = "Код"
+        
+        view.addSubview(titleLabel)
+        view.addSubview(phoneLabel)
+        view.addSubview(codeField)
+        view.addSubview(continueButton)
+        view.addSubview(alertLabel)
+        view.addSubview(activityIndicator)
+        
+        continueButtonBottomConstraint = continueButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        
+        codeField.delegate = self
+        
+        continueButton.addTarget(self, action: #selector(CodePresenter.checkCode), for: .touchUpInside)
+    }
+    
+    func layoutView() {
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            phoneLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            phoneLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            phoneLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            codeField.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 8),
+            codeField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            codeField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            codeField.heightAnchor.constraint(equalToConstant: 42),
+                        
+            continueButtonBottomConstraint,
+            continueButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            continueButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            continueButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            alertLabel.topAnchor.constraint(equalTo: codeField.bottomAnchor, constant: 8),
+            alertLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    func willAppear() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    func willDisappear() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
+    }
+    
 }

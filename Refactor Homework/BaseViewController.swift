@@ -80,15 +80,18 @@ extension BaseViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-//            let phoneBuilder = PhoneBuilder()
-//            let vc = phoneBuilder.build()
-            let phoneEditVC = PhoneEditViewController(networkService: networkService)
-            navigationController?.pushViewController(phoneEditVC, animated: true)
+            let phoneBuilder = PhoneBuilder(networkService: NetworkServiceMock())
+            let phoneVC = phoneBuilder.build()
+//            let phoneEditVC = PhoneEditViewController(networkService: networkService)
+            present(phoneVC, animated: true, completion: nil)
         case 1:
-            let bonusVC = BonusViewController(networkService: networkService)
-            navigationController?.pushViewController(bonusVC, animated: true)
+            let bonusBuilder = BonusBuilder(networkService: NetworkServiceMock())
+            let bonusVC = bonusBuilder.build()
+//            let bonusVC = BonusViewController(networkService: networkService)
+            present(bonusVC, animated: true)
         case 2:
-            let callVC = CallViewController(networkService: networkService)
+            let callBuilder = CallBuilder(networkService: NetworkServiceMock())
+            let callVC = callBuilder.build()
             present(callVC, animated: true, completion: nil)
         default:
             break

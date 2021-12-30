@@ -4,16 +4,23 @@
 
 import UIKit
 
+protocol PhoneView: AnyObject {
+    func buildView()
+    func buildConstraints()
+    func willAppear()
+    func willDisappear()
+}
+
 final class PhoneEditViewController: UIViewController {
     
     // MARK: - Properties
     var normalPhoneString = ""
     let phonePattern = "+# (###) ###-##-##"
     var getCodeBottomConstraint: NSLayoutConstraint!
-    let networkService: NetworkServiceMock
+    let presenter: PhonePresenterProtocol
     
-    init(networkService: NetworkServiceMock) {
-        self.networkService = networkService
+    init(presenter: PhonePresenterProtocol ) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -83,80 +90,19 @@ final class PhoneEditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillShowNotification,
-                                                  object: nil)
-        
-        NotificationCenter.default.removeObserver(self,
-                                                  name: UIResponder.keyboardWillHideNotification,
-                                                  object: nil)
+        presenter.willDisappear()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
+        presenter.willAppear()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        buildView()
-        buildConstraints()
-    }
-    
-    // MARK: - Helper methods
-    private func buildView() {
-        view.backgroundColor = .systemBackground
-        
-        phoneField.delegate = self
-        navigationItem.title = "Вход"
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKB)))
-        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PhonePresenter.didAgreementClicked)))
-        getCodeButton.addTarget(self, action: #selector(PhonePresenter.didCodeClicked), for: .touchUpInside)
-        
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(phoneLabel)
-        view.addSubview(phoneField)
-        view.addSubview(noticeLabel)
-        view.addSubview(getCodeButton)
-        view.addSubview(activityIndicator)
-    }
-    
-    private func buildConstraints() {
-        
-        getCodeBottomConstraint = getCodeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-        
-        NSLayoutConstraint.activate([
-            phoneLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            phoneLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            phoneLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
-            phoneField.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 8),
-            phoneField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            phoneField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            phoneField.heightAnchor.constraint(equalToConstant: 42),
-            
-            noticeLabel.bottomAnchor.constraint(equalTo: getCodeButton.topAnchor, constant: -8),
-            noticeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            noticeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
-            getCodeBottomConstraint,
-            getCodeButton.heightAnchor.constraint(equalToConstant: 44),
-            getCodeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            getCodeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        presenter.viewDidLoadEvent()
     }
     
 }
@@ -222,5 +168,74 @@ extension PhoneEditViewController {
                 self?.view.layoutIfNeeded()
             }
         }
+    }
+}
+
+extension PhoneEditViewController: PhoneView {
+    func buildView() {
+        view.backgroundColor = .systemBackground
+        
+        phoneField.delegate = self
+        navigationItem.title = "Вход"
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKB)))
+        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PhonePresenter.didAgreementClicked)))
+        getCodeButton.addTarget(self, action: #selector(PhonePresenter.didCodeClicked), for: .touchUpInside)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(phoneLabel)
+        view.addSubview(phoneField)
+        view.addSubview(noticeLabel)
+        view.addSubview(getCodeButton)
+        view.addSubview(activityIndicator)
+    }
+    
+    func buildConstraints() {
+        
+        getCodeBottomConstraint = getCodeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        
+        NSLayoutConstraint.activate([
+            phoneLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            phoneLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            phoneLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            phoneField.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 8),
+            phoneField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            phoneField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            phoneField.heightAnchor.constraint(equalToConstant: 42),
+            
+            noticeLabel.bottomAnchor.constraint(equalTo: getCodeButton.topAnchor, constant: -8),
+            noticeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            noticeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            getCodeBottomConstraint,
+            getCodeButton.heightAnchor.constraint(equalToConstant: 44),
+            getCodeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            getCodeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    func willAppear() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
+    func willDisappear() {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        
+        NotificationCenter.default.removeObserver(self,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
     }
 }

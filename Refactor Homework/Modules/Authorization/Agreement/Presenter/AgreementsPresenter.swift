@@ -8,33 +8,24 @@
 import Foundation
 
 protocol AgreementProtocol {
-    func showAgreement()
-    init(agreement: AgreementViewController, networkService: NetworkServiceMock)
+    func viewDidLoadEvent()
+    init(networkService: NetworkServiceMock)
 }
 
-final class AgreementPresenter {
+final class AgreementPresenter: AgreementProtocol {
     
     let networkService: NetworkServiceMock
-    let view: AgreementViewController?
+    weak var agreementView: AgreementViewController?
     
-    init(networkService: NetworkServiceMock, view: AgreementViewController) {
-        self.view = view
+    init(networkService: NetworkServiceMock) {
         self.networkService = networkService
     }
     
-    func showAgreement() {
-        networkService.getAgreement { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.view?.activityIndicator.stopAnimating()
-                switch result {
-                case .success(let model):
-                    self.view?.agreementTextView.text = model.text
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+    func viewDidLoadEvent() {
+        agreementView?.setupView()
+        agreementView?.layoutView()
+        agreementView?.showAgreement()
     }
+    
     
 }

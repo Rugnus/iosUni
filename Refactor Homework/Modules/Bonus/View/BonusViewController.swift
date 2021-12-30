@@ -4,12 +4,20 @@
 
 import UIKit
 
+protocol BonusView: AnyObject {
+    func setupView()
+    func layoutView()
+    func getBalance()
+    func getText()
+}
+
 final class BonusViewController: UIViewController {
 
     let networkService: NetworkServiceMock
-    
-    init(networkService: NetworkServiceMock) {
+    let presenter: BonusProtocol
+    init(networkService: NetworkServiceMock, presenter: BonusProtocol) {
         self.networkService = networkService
+        self.presenter = presenter
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -55,6 +63,14 @@ final class BonusViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        presenter.viewDidLoadEvent()
+        
+    }
+}
+
+extension BonusViewController: BonusView {
+    func setupView() {
         navigationItem.title = "Бонусы"
         
         view.backgroundColor = .systemBackground
@@ -67,7 +83,9 @@ final class BonusViewController: UIViewController {
         view.addSubview(activityIndicator)
         
         activityIndicator.startAnimating()
-        
+    }
+    
+    func layoutView() {
         NSLayoutConstraint.activate([
             bonusTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             bonusTitle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -85,11 +103,32 @@ final class BonusViewController: UIViewController {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
-        BonusPresenter(networkService: NetworkServiceMock(), view: BonusViewController(networkService: NetworkServiceMock())).getBalance()
 
-        BonusPresenter(networkService: NetworkServiceMock(), view: BonusViewController(networkService: NetworkServiceMock())).getText()
-        
-        
+    }
+    
+    func getBalance() {
+        networkService.getBonusBalance { (result) in
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                switch result {
+                case .success(let model):
+                    self.bonusQuantity.text = "\(model.bonusAmount)"
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    func getText() {
+        networkService.getBonusText { (result) in
+            switch result {
+            case .success(let model):
+                DispatchQueue.main.async {
+                    self.bonusTextView.text = model.bonusText
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

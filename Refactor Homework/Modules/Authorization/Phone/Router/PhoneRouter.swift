@@ -13,46 +13,34 @@ protocol PhoneRouterProtocol: AnyObject {
 }
 
 final class PhoneRouter: PhoneRouterProtocol {
-    weak var vc: UIViewController?
-    let networkService: NetworkServiceMock
-    let phoneVC: PhoneEditViewController
+    weak var phoneVC: PhoneEditViewController?
     let model: Phone
-    let agreementPresenter: AgreementPresenter
     
-    init(networkService: NetworkServiceMock, phoneVC: PhoneEditViewController, model: Phone, agreementPresenter: AgreementPresenter) {
-        self.networkService = networkService
-        self.phoneVC = phoneVC
+    init(networkService: NetworkServiceMock, model: Phone) {
         self.model = model
-        self.agreementPresenter = agreementPresenter
     }
     
     
     func openCodeVC() {
-        phoneVC.view.endEditing(true)
+        phoneVC?.view.endEditing(true)
         
         let phoneNumberWithOutPattern = model.normalPhoneString.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         
-        phoneVC.activityIndicator.startAnimating()
+        let codeBuilder = CodeBuilder(networkService: NetworkServiceMock())
+        let codeVC = codeBuilder.build()
+
+        var codeModel = Code()
+        codeModel.phoneString = self.model.normalPhoneString
+        self.phoneVC?.navigationController?.pushViewController(codeVC, animated: true)
+                
+                
+            
         
-        networkService.authSent(phoneNumber: phoneNumberWithOutPattern) {  [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.phoneVC.activityIndicator.stopAnimating()
-                switch result {
-                case .success(_):
-                    let codeVC = CodeEditViewController(networkService: NetworkServiceMock(), codeModel: Code())
-                    var codeModel = Code()
-                    codeModel.phoneString = self.model.normalPhoneString
-                    self.phoneVC.navigationController?.pushViewController(codeVC, animated: true)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
     }
     @objc func openAgreementVC() {
-        let agVC = AgreementViewController(networkService: networkService)
-        phoneVC.navigationController?.pushViewController(agVC, animated: true)
+        let agreementBuilder = AgreementBuilder(networkService: NetworkServiceMock())
+        let agVC = agreementBuilder.build()
+        phoneVC?.navigationController?.pushViewController(agVC, animated: true)
     }
     
 }

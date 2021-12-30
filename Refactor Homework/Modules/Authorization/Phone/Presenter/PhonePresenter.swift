@@ -8,23 +8,35 @@
 import Foundation
 
 protocol PhonePresenterProtocol {
-    init(phoneVC: PhoneEditViewController, router: PhoneRouter, phoneInteractor: PhoneInteractor)
+    init(router: PhoneRouter)
     func didAgreementClicked()
     func didCodeClicked()
-    func didTextFieldChange(text: String)
+    func viewDidLoadEvent()
+    func willAppear()
+    func willDisappear()
 }
 
 final class PhonePresenter: PhonePresenterProtocol {
     
     
-    let phoneVC: PhoneEditViewController
+    weak var phoneVC: PhoneEditViewController?
     let router: PhoneRouter
-    let phoneInteractor: PhoneInteractor
     
-    init(phoneVC: PhoneEditViewController, router: PhoneRouter, phoneInteractor: PhoneInteractor) {
-        self.phoneVC = phoneVC
+    init(router: PhoneRouter) {
         self.router = router
-        self.phoneInteractor = phoneInteractor
+    }
+    
+    func viewDidLoadEvent() {
+        phoneVC?.buildView()
+        phoneVC?.buildConstraints()
+    }
+    
+    func willAppear() {
+        phoneVC?.willAppear()
+    }
+    
+    func willDisappear() {
+        phoneVC?.willDisappear()
     }
     
     @objc func didCodeClicked() {
@@ -35,9 +47,6 @@ final class PhonePresenter: PhonePresenterProtocol {
         router.openAgreementVC()
     }
     
-    func didTextFieldChange(text: String) {
-        phoneInteractor.textFieldChange(text: text)
-    }
     
 }
 

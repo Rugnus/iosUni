@@ -8,37 +8,53 @@
 import Foundation
 
 protocol CodeProtocol {
-    init(networkService: NetworkServiceMock, model: Code, view: CodeEditViewController)
+    init(networkService: NetworkServiceMock, model: Code)
     func checkCode()
+    func viewDidLoadEvent()
+    func viewWillAppearEvent()
+    func viewWillDisappearEvent()
 }
 
 final class CodePresenter: CodeProtocol {
     
     let networkService: NetworkServiceMock
     let model: Code
-    let view: CodeEditViewController
+    weak var view: CodeEditViewController?
+    weak var codeView: CodeView?
     
-    init(networkService: NetworkServiceMock, model: Code, view: CodeEditViewController) {
+    init(networkService: NetworkServiceMock, model: Code) {
         self.networkService = networkService
         self.model = model
-        self.view = view
+    }
+    
+    func viewDidLoadEvent() {
+        codeView?.setupView()
+        codeView?.layoutView()
+    }
+    
+    func viewWillAppearEvent() {
+        codeView?.willAppear()
+    }
+    
+    func viewWillDisappearEvent() {
+        codeView?.willDisappear()
     }
     
     @objc func checkCode() {
-        view.codeField.resignFirstResponder()
+        view?.codeField.resignFirstResponder()
         
-        view.activityIndicator.startAnimating()
+        view?.activityIndicator.startAnimating()
         
         networkService.authSent(smsCode: model.normalCodeString) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                self.view.activityIndicator.stopAnimating()
+                self.view?.activityIndicator.stopAnimating()
                 switch result {
                 case .success(_):
-                    self.view.sendSMSClicked()
+                    self.view?.sendSMSClicked()
                 case .failure(_):
-                    self.view.alertLabel.isHidden = false
+                    self.view?.alertLabel.isHidden = false
                 }
             }
         }

@@ -1,5 +1,5 @@
 //
-//  PhoneBuilder.swift
+//  CallBuilder.swift
 //  Refactor Homework
 //
 //  Created by Sungur on 30.12.2021.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class PhoneBuilder {
+final class CallBuilder {
     
     private let networkService: NetworkServiceMock
     
@@ -17,11 +17,11 @@ final class PhoneBuilder {
     }
     
     func build() -> UIViewController {
+        let callPresenter = CallPresenter(networkService: networkService)
+        let callViewController = CallViewController(presenter: callPresenter)
+        callPresenter.callView = callViewController
         
-        let phonePresenter = PhonePresenter(router: PhoneRouter(networkService: NetworkServiceMock(), model: Phone()))
-        let phoneVC = PhoneEditViewController(presenter: phonePresenter)
-        phonePresenter.phoneVC = phoneVC
-        
-        return phoneVC
+        return callViewController
     }
 }
+
