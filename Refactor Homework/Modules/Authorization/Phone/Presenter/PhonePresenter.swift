@@ -8,7 +8,7 @@
 import Foundation
 
 protocol PhonePresenterProtocol {
-    init(router: PhoneRouter)
+    init(router: PhoneRouter, interactor: PhoneInteractor)
     func didAgreementClicked()
     func didCodeClicked()
     func viewDidLoadEvent()
@@ -21,9 +21,11 @@ final class PhonePresenter: PhonePresenterProtocol {
     
     weak var phoneVC: PhoneEditViewController?
     let router: PhoneRouter
+    let interactor: PhoneInteractor
     
-    init(router: PhoneRouter) {
+    init(router: PhoneRouter, interactor: PhoneInteractor) {
         self.router = router
+        self.interactor = interactor
     }
     
     func viewDidLoadEvent() {
@@ -40,7 +42,8 @@ final class PhonePresenter: PhonePresenterProtocol {
     }
     
     @objc func didCodeClicked() {
-        router.openCodeVC()
+        print("Code clicked")
+        interactor.openCodeVC()
     }
     
     @objc func didAgreementClicked() {

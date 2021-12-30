@@ -18,9 +18,11 @@ final class PhoneEditViewController: UIViewController {
     let phonePattern = "+# (###) ###-##-##"
     var getCodeBottomConstraint: NSLayoutConstraint!
     let presenter: PhonePresenterProtocol
+    let networkService: NetworkServiceMock
     
-    init(presenter: PhonePresenterProtocol ) {
+    init(presenter: PhonePresenterProtocol, networkService: NetworkServiceMock) {
         self.presenter = presenter
+        self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -110,21 +112,17 @@ final class PhoneEditViewController: UIViewController {
 extension PhoneEditViewController: UITextFieldDelegate {
     
     
-    
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text else {
             return
         }
 
-        func textFieldChange(text: String) {
-            if text.count == phonePattern.count {
-                enableCodeButton(true)
-                normalPhoneString = text
-            } else {
-                enableCodeButton(false)
-            }
+        if text.count == phonePattern.count {
+            enableCodeButton(true)
+            normalPhoneString = text
+        } else {
+            enableCodeButton(false)
         }
-        
     }
 
     func textField(_ textField: UITextField,
@@ -145,9 +143,41 @@ extension PhoneEditViewController {
         getCodeButton.backgroundColor = enabled ? .systemBlue : .lightGray
     }
     
+    @objc func getCodeClicked() {
+        hideKB()
+        
+        let phoneNumberWithOutPattern = normalPhoneString.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        
+        activityIndicator.startAnimating()
+        
+        networkService.authSent(phoneNumber: phoneNumberWithOutPattern) {  [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                switch result {
+                case .success(_):
+                    let codeBuilder = CodeBuilder(networkService: NetworkServiceMock())
+                    let codeVC = codeBuilder.build()
+        //            let bonusVC = BonusViewController(networkService: networkService)
+                    self.present(codeVC, animated: true)
+//                    let codeVC = CodeEditViewController(codeModel: Code(), presenter: CodeProtocol())
+//                    codeVC.phoneString = self.normalPhoneString
+//                    self.navigationController?.pushViewController(codeVC, animated: true)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    @objc func openAgreementVC() {
+        presenter.didAgreementClicked()
+    }
+    
     @objc func hideKB() {
         view.endEditing(true)
     }
+    
     
     @objc func keyboardWillShow(notification: Notification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
@@ -178,8 +208,8 @@ extension PhoneEditViewController: PhoneView {
         phoneField.delegate = self
         navigationItem.title = "Вход"
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKB)))
-        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(PhonePresenter.didAgreementClicked)))
-        getCodeButton.addTarget(self, action: #selector(PhonePresenter.didCodeClicked), for: .touchUpInside)
+        noticeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(openAgreementVC)))
+        getCodeButton.addTarget(self, action: #selector(getCodeClicked), for: .touchUpInside)
         
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         

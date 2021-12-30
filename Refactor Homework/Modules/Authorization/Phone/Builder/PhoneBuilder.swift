@@ -18,8 +18,8 @@ final class PhoneBuilder {
     
     func build() -> UIViewController {
         
-        let phonePresenter = PhonePresenter(router: PhoneRouter(networkService: NetworkServiceMock(), model: Phone()))
-        let phoneVC = PhoneEditViewController(presenter: phonePresenter)
+        let phonePresenter = PhonePresenter(router: PhoneRouter(networkService: NetworkServiceMock(), model: Phone()), interactor: PhoneInteractor(networkService: NetworkServiceMock(), model: Phone(), router: PhoneRouter(networkService: NetworkServiceMock(), model: Phone())))
+        let phoneVC = PhoneEditViewController(presenter: phonePresenter, networkService: NetworkServiceMock())
         phonePresenter.phoneVC = phoneVC
         
         return phoneVC
