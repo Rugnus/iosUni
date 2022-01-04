@@ -7,16 +7,12 @@ import UIKit
 protocol BonusView: AnyObject {
     func setupView()
     func layoutView()
-    func getBalance()
-    func getText()
 }
 
 final class BonusViewController: UIViewController {
 
-    let networkService: NetworkServiceMock
     let presenter: BonusProtocol
-    init(networkService: NetworkServiceMock, presenter: BonusProtocol) {
-        self.networkService = networkService
+    init(presenter: BonusProtocol) {
         self.presenter = presenter
         
         super.init(nibName: nil, bundle: nil)
@@ -106,29 +102,4 @@ extension BonusViewController: BonusView {
 
     }
     
-    func getBalance() {
-        networkService.getBonusBalance { (result) in
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                switch result {
-                case .success(let model):
-                    self.bonusQuantity.text = "\(model.bonusAmount)"
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-    func getText() {
-        networkService.getBonusText { (result) in
-            switch result {
-            case .success(let model):
-                DispatchQueue.main.async {
-                    self.bonusTextView.text = model.bonusText
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 }

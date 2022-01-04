@@ -50,6 +50,10 @@ final class PhonePresenter: PhonePresenterProtocol {
         router.openAgreementVC()
     }
     
+    @objc func didCodeSuccess() {
+        router.openCodeVC()
+    }
+    
     
 }
 

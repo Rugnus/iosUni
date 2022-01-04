@@ -18,11 +18,9 @@ final class PhoneEditViewController: UIViewController {
     let phonePattern = "+# (###) ###-##-##"
     var getCodeBottomConstraint: NSLayoutConstraint!
     let presenter: PhonePresenterProtocol
-    let networkService: NetworkServiceMock
     
-    init(presenter: PhonePresenterProtocol, networkService: NetworkServiceMock) {
+    init(presenter: PhonePresenterProtocol) {
         self.presenter = presenter
-        self.networkService = networkService
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -146,28 +144,11 @@ extension PhoneEditViewController {
     @objc func getCodeClicked() {
         hideKB()
         
-        let phoneNumberWithOutPattern = normalPhoneString.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+//        let phoneNumberWithOutPattern = normalPhoneString.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         
         activityIndicator.startAnimating()
         
-        networkService.authSent(phoneNumber: phoneNumberWithOutPattern) {  [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                switch result {
-                case .success(_):
-                    let codeBuilder = CodeBuilder(networkService: NetworkServiceMock())
-                    let codeVC = codeBuilder.build()
-        //            let bonusVC = BonusViewController(networkService: networkService)
-                    self.present(codeVC, animated: true)
-//                    let codeVC = CodeEditViewController(codeModel: Code(), presenter: CodeProtocol())
-//                    codeVC.phoneString = self.normalPhoneString
-//                    self.navigationController?.pushViewController(codeVC, animated: true)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
+        presenter.didCodeClicked()
     }
     
     @objc func openAgreementVC() {

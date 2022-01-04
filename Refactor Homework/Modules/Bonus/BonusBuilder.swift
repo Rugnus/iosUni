@@ -18,7 +18,7 @@ final class BonusBuilder {
     
     func build() -> UIViewController {
         let bonusPresenter = BonusPresenter(networkService: networkService)
-        let bonusViewController = BonusViewController(networkService: NetworkServiceMock(), presenter: bonusPresenter)
+        let bonusViewController = BonusViewController(presenter: bonusPresenter)
         bonusPresenter.bonusView = bonusViewController
         
         return bonusViewController

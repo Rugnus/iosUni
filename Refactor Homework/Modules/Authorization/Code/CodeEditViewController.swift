@@ -194,6 +194,7 @@ extension CodeEditViewController: CodeView {
     
     func setupView() {
    
+        view.backgroundColor = .white
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         phoneLabel.text = "Отправлен на \(codeModel.phoneString)"

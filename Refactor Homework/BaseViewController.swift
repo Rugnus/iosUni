@@ -83,12 +83,12 @@ extension BaseViewController: UITableViewDelegate, UITableViewDataSource {
             let phoneBuilder = PhoneBuilder(networkService: NetworkServiceMock())
             let phoneVC = phoneBuilder.build()
 //            let phoneEditVC = PhoneEditViewController(networkService: networkService)
-            present(phoneVC, animated: true, completion: nil)
+            navigationController?.pushViewController(phoneVC, animated: true)
         case 1:
             let bonusBuilder = BonusBuilder(networkService: NetworkServiceMock())
             let bonusVC = bonusBuilder.build()
 //            let bonusVC = BonusViewController(networkService: networkService)
-            present(bonusVC, animated: true)
+            navigationController?.pushViewController(bonusVC, animated: true)
         case 2:
             let callBuilder = CallBuilder(networkService: NetworkServiceMock())
             let callVC = callBuilder.build()

@@ -14,23 +14,12 @@ protocol PhoneRouterProtocol: AnyObject {
 
 final class PhoneRouter: PhoneRouterProtocol {
     weak var phoneVC: PhoneEditViewController?
-    let model: Phone
-    
-    init(networkService: NetworkServiceMock, model: Phone) {
-        self.model = model
-    }
-    
     
     func openCodeVC() {
         phoneVC?.view.endEditing(true)
-        
-        let phoneNumberWithOutPattern = model.normalPhoneString.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
-        
         let codeBuilder = CodeBuilder(networkService: NetworkServiceMock())
         let codeVC = codeBuilder.build()
 
-        var codeModel = Code()
-        codeModel.phoneString = self.model.normalPhoneString
         self.phoneVC?.navigationController?.pushViewController(codeVC, animated: true)
                 
                 
