@@ -19,7 +19,6 @@ final class CodePresenter: CodeProtocol {
     
     let networkService: NetworkServiceMock
     let model: Code
-    weak var view: CodeEditViewController?
     weak var codeView: CodeView?
     
     init(networkService: NetworkServiceMock, model: Code) {
@@ -41,20 +40,20 @@ final class CodePresenter: CodeProtocol {
     }
     
     @objc func checkCode() {
-        view?.codeField.resignFirstResponder()
+        codeView?.updateCodeField()
         
-        view?.activityIndicator.startAnimating()
+        codeView?.startActivityIndicator()
         
         networkService.authSent(smsCode: model.normalCodeString) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                self.view?.activityIndicator.stopAnimating()
+                self.codeView?.stopActivityIndicator()
                 switch result {
                 case .success(_):
-                    self.view?.sendSMSClicked()
+                    self.codeView?.sendSMSClicked()
                 case .failure(_):
-                    self.view?.alertLabel.isHidden = false
+                    self.codeView?.showAlertLabel()
                 }
             }
         }

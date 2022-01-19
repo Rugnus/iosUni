@@ -7,7 +7,6 @@ import UIKit
 protocol AgreementView: AnyObject {
     func setupView()
     func layoutView()
-    func showAgreement()
 }
 
 class AgreementViewController: UIViewController {
@@ -40,6 +39,7 @@ class AgreementViewController: UIViewController {
         super.viewDidLoad()
         
         presenter.viewDidLoadEvent()
+        presenter.showAgreement()
     }
 }
 
@@ -67,20 +67,5 @@ extension AgreementViewController: AgreementView {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-    }
-    
-    func showAgreement() {
-        networkService.getAgreement { [weak self] result in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-                switch result {
-                case .success(let model):
-                    self.agreementTextView.text = model.text
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
     }
 }

@@ -9,6 +9,12 @@ protocol CodeView: AnyObject {
     func layoutView()
     func willAppear()
     func willDisappear()
+    func updateCodeField()
+    func startActivityIndicator()
+    func stopActivityIndicator()
+    func showAlertLabel()
+    func sendSMSClicked()
+    
 }
 
 class CodeEditViewController: UIViewController {
@@ -154,10 +160,10 @@ extension CodeEditViewController: UITextFieldDelegate {
 
 extension CodeEditViewController {
     
-    func sendSMSClicked() {
-        hideKB()
-        navigationController?.popToRootViewController(animated: true)
-    }
+//    func sendSMSClicked() {
+//        hideKB()
+//        navigationController?.popToRootViewController(animated: true)
+//    }
 
     fileprivate func enableCodeButton(_ enabled: Bool) {
         continueButton.isEnabled = enabled
@@ -263,5 +269,28 @@ extension CodeEditViewController: CodeView {
                                                   name: UIResponder.keyboardWillHideNotification,
                                                   object: nil)
     }
+    
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
+    
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+    
+    func updateCodeField() {
+        codeField.resignFirstResponder()
+    }
+    
+    func showAlertLabel() {
+        alertLabel.isHidden = false
+    }
+    
+    func sendSMSClicked() {
+        view.endEditing(true)
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    
     
 }

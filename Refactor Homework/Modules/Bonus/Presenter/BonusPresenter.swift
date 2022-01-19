@@ -14,7 +14,7 @@ protocol BonusProtocol {
 final class BonusPresenter: BonusProtocol {
     
     let networkService: NetworkServiceMock
-    weak var bonusView: BonusViewController?
+    weak var bonusView: BonusView?
     
     init(networkService: NetworkServiceMock) {
         self.networkService = networkService
@@ -23,10 +23,10 @@ final class BonusPresenter: BonusProtocol {
     func getBalance() {
         networkService.getBonusBalance { (result) in
             DispatchQueue.main.async {
-                self.bonusView?.activityIndicator.stopAnimating()
+                self.bonusView?.stopActivityIndicator()
                 switch result {
                 case .success(let model):
-                    self.bonusView?.bonusQuantity.text = "\(model.bonusAmount)"
+                    self.bonusView?.updateBonusBalance("\(model.bonusAmount)")
                 case .failure(let error):
                     print(error)
                 }
@@ -39,7 +39,7 @@ final class BonusPresenter: BonusProtocol {
             switch result {
             case .success(let model):
                 DispatchQueue.main.async {
-                    self.bonusView?.bonusTextView.text = model.bonusText
+                    self.bonusView?.getBonusText(model.bonusText)
                 }
             case .failure(let error):
                 print(error)

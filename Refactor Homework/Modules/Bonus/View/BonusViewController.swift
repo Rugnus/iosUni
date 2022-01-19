@@ -7,6 +7,10 @@ import UIKit
 protocol BonusView: AnyObject {
     func setupView()
     func layoutView()
+    
+    func stopActivityIndicator()
+    func updateBonusBalance(_ balance: String)
+    func getBonusText(_ text: String)
 }
 
 final class BonusViewController: UIViewController {
@@ -14,7 +18,6 @@ final class BonusViewController: UIViewController {
     let presenter: BonusProtocol
     init(presenter: BonusProtocol) {
         self.presenter = presenter
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -101,5 +104,18 @@ extension BonusViewController: BonusView {
         ])
 
     }
+    
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+    
+    func updateBonusBalance(_ balance: String) {
+        bonusQuantity.text = balance
+    }
+    
+    func getBonusText(_ text: String) {
+        bonusTextView.text = text
+    }
+    
     
 }
