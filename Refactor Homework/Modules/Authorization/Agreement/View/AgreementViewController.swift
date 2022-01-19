@@ -7,15 +7,16 @@ import UIKit
 protocol AgreementView: AnyObject {
     func setupView()
     func layoutView()
+    
+    func stopActivityIndicator()
+    func updateAgreementTextView(_ text: String)
 }
 
 class AgreementViewController: UIViewController {
     
-    let networkService: NetworkServiceMock
     let presenter: AgreementProtocol
     
-    init(networkService: NetworkServiceMock, presenter: AgreementProtocol) {
-        self.networkService = networkService
+    init(presenter: AgreementProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -67,5 +68,13 @@ extension AgreementViewController: AgreementView {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+    
+    func updateAgreementTextView(_ text: String) {
+        agreementTextView.text = text
     }
 }

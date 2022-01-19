@@ -16,7 +16,7 @@ protocol AgreementProtocol {
 final class AgreementPresenter: AgreementProtocol {
     
     let networkService: NetworkServiceMock
-    weak var agreementView: AgreementViewController?
+    weak var agreementView: AgreementView?
     
     init(networkService: NetworkServiceMock) {
         self.networkService = networkService
@@ -31,10 +31,10 @@ final class AgreementPresenter: AgreementProtocol {
         networkService.getAgreement { [weak self] result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.agreementView?.activityIndicator.stopAnimating()
+                self.agreementView?.stopActivityIndicator()
                 switch result {
                 case .success(let model):
-                    self.agreementView?.agreementTextView.text = model.text
+                    self.agreementView?.updateAgreementTextView(model.text) 
                 case .failure(let error):
                     print(error)
                 }

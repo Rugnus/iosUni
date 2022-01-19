@@ -18,7 +18,7 @@ final class AgreementBuilder {
     
     func build() -> UIViewController {
         let agreementPresenter = AgreementPresenter(networkService: networkService)
-        let agreementViewController = AgreementViewController(networkService: NetworkServiceMock(), presenter: agreementPresenter)
+        let agreementViewController = AgreementViewController( presenter: agreementPresenter)
         agreementPresenter.agreementView = agreementViewController
         
         return agreementViewController
