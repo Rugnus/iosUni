@@ -9,7 +9,7 @@ import Foundation
 
 protocol CodeProtocol {
     init(networkService: NetworkServiceMock, model: Code)
-    func checkCode()
+    func checkCode(code: String)
     func viewDidLoadEvent()
     func viewWillAppearEvent()
     func viewWillDisappearEvent()
@@ -39,12 +39,14 @@ final class CodePresenter: CodeProtocol {
         codeView?.willDisappear()
     }
     
-    @objc func checkCode() {
+    @objc func checkCode(code: String) {
         codeView?.updateCodeField()
+        
+        print(code)
         
         codeView?.startActivityIndicator()
         
-        networkService.authSent(smsCode: model.normalCodeString) { [weak self] result in
+        networkService.authSent(smsCode: code) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -57,5 +59,6 @@ final class CodePresenter: CodeProtocol {
                 }
             }
         }
+        
     }
 }

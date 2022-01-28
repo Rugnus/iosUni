@@ -218,7 +218,12 @@ extension CodeEditViewController: CodeView {
         
         codeField.delegate = self
         
-        continueButton.addTarget(self, action: #selector(CodePresenter.checkCode), for: .touchUpInside)
+        continueButton.addTarget(self, action: #selector(checkCode), for: .touchUpInside)
+    }
+    
+    @objc func checkCode() {
+        print(codeField.text)
+        presenter.checkCode(code: codeField.text ?? "")
     }
     
     func layoutView() {

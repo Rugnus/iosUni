@@ -29,6 +29,7 @@ final class PhoneInteractor: PhoneProvider {
         let phoneNumberWithOutPattern = model.normalPhoneString.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var codeModel = Code()
         codeModel.phoneString = self.model.normalPhoneString
+        print(codeModel.phoneString)
         
         networkService.authSent(phoneNumber: phoneNumberWithOutPattern) {  [weak self] result in
             guard let self = self else { return }
